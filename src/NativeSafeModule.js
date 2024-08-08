@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter } from 'react-native';
+import { NativeModules, NativeEventEmitter, TurboModuleRegistry } from 'react-native';
 import dedent from 'dedent';
 
 // const AccountModule = SafeModule.create({
@@ -23,6 +23,22 @@ import dedent from 'dedent';
 //     },
 //   },
 // });
+
+function deepCopy(obj) {
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  const copy = Array.isArray(obj) ? [] : {};
+
+  for (let key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      copy[key] = deepCopy(obj[key]);
+    }
+  }
+
+  return copy;
+}
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
@@ -51,7 +67,7 @@ const first = (array, fn) => {
 const moduleWithName = (nameOrArray) => {
   if (!nameOrArray) return null;
   if (Array.isArray(nameOrArray)) return first(nameOrArray, moduleWithName);
-  return NativeModules[nameOrArray];
+  return TurboModuleRegistry ? TurboModuleRegistry.get(nameOrArray) : NativeModules[nameOrArray]
 };
 
 const getPrimaryName = (nameOrArray) => {
@@ -142,10 +158,12 @@ const create = function SafeModuleCreate(options) {
     }
   }
 
+  const deepCopyModule = deepCopy(module)
+
   Object.assign(
     result,
     mock,
-    module,
+    deepCopyModule,
     boundOverrides
   );
 

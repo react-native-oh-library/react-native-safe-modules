@@ -1,6 +1,6 @@
 {
-  "name": "react-native-safe-modules",
-  "version": "1.0.0",
+  "name": "@react-native-oh-tpl/react-native-safe-modules",
+  "version": "1.0.3-0.0.1",
   "description": "A safe way to consume React Native NativeModules (forked from react-native-safe-module by @lelandrichardson)",
   "main": "lib/index.js",
   "scripts": {
@@ -12,9 +12,12 @@
     "test:watch": "npm run --silent test:base -- --recursive test/ --watch",
     "test:base": "mocha --require ./test/_setup.js --require react-native-mock/mock.js --compilers js:babel-core/register"
   },
+  "harmony": {
+    "alias": "react-native-safe-modules"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/emilioicai/react-native-safe-modules.git"
+    "url": "git+https://github.com/react-native-oh-library/react-native-safe-modules.git"
   },
   "keywords": [
     "react-native",
@@ -32,7 +35,8 @@
     "react-native": "*"
   },
   "dependencies": {
-    "dedent": "^0.6.0"
+    "dedent": "^0.6.0",
+    "react-native-safe-modules": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
