@@ -1,6 +1,6 @@
 {
-  "name": "@react-native-oh-tpl/react-native-safe-modules",
-  "version": "1.0.3-0.0.1",
+  "name": "@react-native-ohos/react-native-safe-modules",
+  "version": "1.0.4",
   "description": "A safe way to consume React Native NativeModules (forked from react-native-safe-module by @lelandrichardson)",
   "main": "lib/index.js",
   "scripts": {
